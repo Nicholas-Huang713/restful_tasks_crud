@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Restful Tasks</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+  
+    <div class="container text-center">
+        <h1>
+           {{ title }}!
+        </h1>
+        <button (click)="getTasksFromService()">Get All Tasks</button>
+        <hr>
+    </div>
+    <div class="container">
+        
+        <form (submit)= "onSubmit()">
+            <!-- <p>{{ newTask | json}}</p> -->
+            <label>
+              Task title:
+              <input type="text" name="newTask.title" [(ngModel)]="newTask.title" />
+            </label>
+            <label>
+              Task Description:
+              <input type="text" name="newTask.description" [(ngModel)]="newTask.description" />
+            </label>
+            
+            <button>Submit Task</button>
+          </form>
+
+
+          <hr>
+
+
+        <h2>All Tasks</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Task</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of tasks">
+              <td>{{ task.title }} | <button (click)="editForm(task)">Edit</button> | <button (click)="onDelete(task)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        
+        <hr>
+
+        <div *ngIf="editTog">
+        <h2>Edit Task</h2>
+        <form (submit)= "onEdit()">
+          <p>Title: <input type="text" name="editTask.title" [(ngModel)] = "editTask.title"></p> 
+          <p>Description: <input type="text" name="editTask.description" [(ngModel)]="editTask.description"></p>
+          <button>Submit</button>
+        </form>
+        </div>
+
+
+        <!-- <li *ngIf="task">{{ task.title }} : {{ task.description }} </li> -->
+        
+    </div>
+  
+</body>
+</html>
+
+
